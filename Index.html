@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PS5 Surprise</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  overflow:hidden;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb);
+  background-size:400% 400%;
+  animation:bgMove 8s infinite alternate;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  100%{background-position:100% 50%;}
+}
+
+.container{
+  text-align:center;
+}
+
+h1{
+  font-size:42px;
+  margin-bottom:40px;
+  color:white;
+  text-shadow:2px 2px 10px rgba(0,0,0,0.2);
+}
+
+button{
+  padding:15px 35px;
+  border:none;
+  border-radius:30px;
+  margin:15px;
+  font-size:22px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#yes{
+  background:#00e676;
+}
+
+#yes:hover{
+  transform:scale(1.1);
+}
+
+#no{
+  background:#ff5252;
+  position:absolute;
+}
+
+.success{
+  display:none;
+  text-align:center;
+  color:white;
+}
+
+.success h2{
+  font-size:55px;
+  animation:bounce 1s infinite;
+}
+
+.success p{
+  font-size:30px;
+  margin-top:20px;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-20px);}
+}
+
+.heart{
+  position:absolute;
+  color:white;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  from{
+    transform:translateY(100vh);
+    opacity:1;
+  }
+  to{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+  <h1>Will you buy me a PS5? 🎮</h1>
+  <button id="yes">Yes 💖</button>
+  <button id="no">No 😈</button>
+</div>
+
+<div class="success" id="success">
+  <h2>🎉 THANK YOU 🎉</h2>
+  <p>You are the Best 💕</p>
+  <p>You're officially awesome 😄</p>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+noBtn.addEventListener("mouseover", ()=>{
+
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 100);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+yesBtn.addEventListener("click", ()=>{
+
+  document.getElementById("main").style.display = "none";
+  document.getElementById("success").style.display = "block";
+
+});
+
+function createHeart(){
+
+  let heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = Math.random()*20 + 20 + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },6000);
+}
+
+setInterval(createHeart,500);
+</script>
+
+</body>
+</html>
